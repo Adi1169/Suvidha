@@ -51,27 +51,43 @@
         android:textColorHint="@color/colorgrey" />
 
 
-
     <Button
-        android:id="@+id/register"
+        android:id="@+id/login"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="305dp"
+        android:layout_marginTop="269dp"
         android:background="@drawable/buttondesign"
-        android:text="Register"
+        android:onClick="logged"
 
+        android:text="Login"
         android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/loged"
+        android:id="@+id/registerpage"
         android:layout_width="220dp"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="364dp"
-        android:text="  Not Registered?Register Here!  "
+        android:layout_marginTop="334dp"
+        android:onClick="onregister"
+        android:text="Not  Registered?Register Here!  "
         android:textColor="@color/colorgrey" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="75dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="165dp"
+        android:layout_marginBottom="265dp"
+        android:visibility="invisible" />
+
+    s
+
 
 </RelativeLayout>

@@ -1,9 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:background="@drawable/gradient"
     tools:context=".AppView">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttondesign"
+                android:onClick="giveservice"
+                android:text="Register" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/colorblizardblue">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient"
+                    android:fontFamily="sans-serif-black"
+                    android:includeFontPadding="true"
+                    android:onClick="cook"
+                    android:paddingLeft="70dp"
+                    android:paddingTop="30dp"
+                    android:text="Mechanic
+"
+                    android:textColor="@color/colorskyblue"
+                    android:textSize="60dp"
+                    tools:text="Cook" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/colorblizardblue">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-black"
+                    android:includeFontPadding="true"
+                    android:paddingLeft="70dp"
+                    android:paddingTop="30dp"
+                    android:text="Mechanic
+"
+                    android:textColor="@color/colorskyblue"
+                    android:textSize="60dp"
+                    tools:text="CareTaker" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/colorblizardblue">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-black"
+                    android:includeFontPadding="true"
+                    android:paddingLeft="70dp"
+                    android:paddingTop="30dp"
+                    android:text="Cleaner
+"
+                    android:textColor="@color/colorskyblue"
+                    android:textSize="60dp"
+                    tools:text="Cleaner" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/colorblizardblue">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-black"
+                    android:includeFontPadding="true"
+                    android:paddingLeft="70dp"
+                    android:paddingTop="30dp"
+                    android:text="Plumber
+"
+                    android:textColor="@color/colorskyblue"
+                    android:textSize="60dp"
+                    tools:text="Plumber" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/colorblizardblue">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-black"
+                    android:includeFontPadding="true"
+                    android:paddingLeft="70dp"
+                    android:paddingTop="30dp"
+                    android:text="Mechanic
+"
+                    android:textColor="@color/colorskyblue"
+                    android:textSize="60dp"
+                    tools:text="Maid" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -7,7 +7,12 @@
         android:icon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".AppView"></activity>
+        <activity android:name=".regsevice"></activity>
+        <activity
+            android:name=".cook"
+            android:label="@string/title_activity_cook"
+            android:theme="@style/NoActionBar" />
+        <activity android:name=".AppView" />
         <activity android:name=".login" />
         <activity android:name=".MainActivity">
             <intent-filter>
