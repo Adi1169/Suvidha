@@ -40,7 +40,7 @@ public class login extends AppCompatActivity {
         pbar = findViewById(R.id.progressBar);
         auth  = FirebaseAuth.getInstance();
     }
-    public void logged(View view) {
+    public void logged(final View view) {
         Toast.makeText(login.this,"i am in", Toast.LENGTH_SHORT).show();
         pbar.setVisibility(view.VISIBLE);
         String memail = email.getText().toString().trim();
@@ -65,11 +65,12 @@ public class login extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(login.this,"successfully logged in", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),AppView.class));
+                    startActivity(new Intent(getApplicationContext(),cate.class));
                     finish();
                 }
                 else{
                     Toast.makeText(login.this,"Error!"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                    pbar.setVisibility(view.INVISIBLE);
                 }
             }
         });

@@ -28,8 +28,8 @@ public class DescribeserviceActivity extends AppCompatActivity {
         em = findViewById(R.id.Review);
         auth  = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
-        descrip = findViewById(R.id.description);1
-        val = getIntent().getStringExtra("email");1
+        descrip = findViewById(R.id.description);
+        val = getIntent().getStringExtra("email");
         serve = getIntent().getStringExtra("serve");
         description = getIntent().getStringExtra("description");
         id = getIntent().getStringExtra("id");

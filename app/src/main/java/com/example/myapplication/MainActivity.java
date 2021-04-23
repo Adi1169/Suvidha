@@ -55,7 +55,7 @@ MainActivity extends AppCompatActivity {
 
     }
 
-    public void Register(View view) {
+    public void Register(final View view) {
         pbar.setVisibility(view.VISIBLE);
         final String memail = email.getText().toString().trim();
         String mpassword =  password.getText().toString().trim();
@@ -104,6 +104,7 @@ MainActivity extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(MainActivity.this,"Error!"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                    pbar.setVisibility(view.INVISIBLE);
                 }
             }
         });
