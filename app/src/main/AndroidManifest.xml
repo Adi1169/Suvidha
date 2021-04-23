@@ -7,7 +7,9 @@
         android:icon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".regsevice"></activity>
+        <activity android:name=".DescribeserviceActivity"></activity>
+        <activity android:name=".services" />
+        <activity android:name=".regsevice" />
         <activity
             android:name=".cook"
             android:label="@string/title_activity_cook"

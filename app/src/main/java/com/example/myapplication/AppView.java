@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -20,12 +21,13 @@ public class AppView extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseFirestore fstore;
     String userId;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_view);
-
+         intent = new Intent(AppView.this,services.class);
 
     }
 
@@ -45,17 +47,45 @@ public class AppView extends AppCompatActivity {
         //});
 
 
-        //FirebaseAuth.getInstance().signOut();
-        //startActivity(new Intent(getApplicationContext(),login.class));
-        //finish();
-    }
-
-    public void cook(View view) {
-        startActivity(new Intent(getApplicationContext(),cook.class));
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(),login.class));
+        finish();
     }
 
     public void giveservice(View view) {
         startActivity(new Intent(getApplicationContext(),regsevice.class));
+    }
+
+    public void sendService(View view) {
+        switch (view.getId()){
+            case R.id.cooking:
+                Toast.makeText(AppView.this,"cooking",Toast.LENGTH_SHORT).show();
+                intent.putExtra("serviceName","Cook");
+                startActivity(intent);
+                break;
+            case R.id.cleaner:
+                Toast.makeText(AppView.this,"Cleaner",Toast.LENGTH_SHORT).show();
+                intent.putExtra("serviceName","Cleaner");
+                startActivity(intent);
+                break;
+            case R.id.caretaker:
+                //Toast.makeText(AppView.this,"Caretaker",Toast.LENGTH_SHORT).show();
+                intent.putExtra("serviceName","Caretaker");
+                startActivity(intent);
+                break;
+            case R.id.plumber:
+                Toast.makeText(AppView.this,"Plumber",Toast.LENGTH_SHORT).show();
+                intent.putExtra("serviceName","Plumber");
+                startActivity(intent);
+                break;
+            case R.id.Maid:
+                Toast.makeText(AppView.this,"Maid",Toast.LENGTH_SHORT).show();
+                intent.putExtra("serviceName","Maid");
+                startActivity(intent);
+                break;
+
+        }
+
     }
 }
 

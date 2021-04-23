@@ -2,7 +2,6 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -33,9 +32,9 @@ public class login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        email = findViewById(R.id.email);
+        email = findViewById(R.id.Review);
         password = findViewById(R.id.pword);
-        login = findViewById(R.id.login);
+        login = findViewById(R.id.Register);
         registerpage = findViewById(R.id.registerpage);
 
         pbar = findViewById(R.id.progressBar);

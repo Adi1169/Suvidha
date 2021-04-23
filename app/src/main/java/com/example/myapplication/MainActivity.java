@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -19,14 +18,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class
+MainActivity extends AppCompatActivity {
     EditText name,email,password,pwordagain;
     Button register;
     TextView loginpage;
@@ -35,12 +34,13 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore fstore;
     String UserID,use;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         name = findViewById(R.id.name);
-        email = findViewById(R.id.email);
+        email = findViewById(R.id.Review);
         password = findViewById(R.id.apword);
         pwordagain = findViewById(R.id.pword);
         register = findViewById(R.id.register);
@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     Map<String,Object>user = new HashMap<>();
                     user.put("name",use);
                     user.put("email",memail);
+
                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

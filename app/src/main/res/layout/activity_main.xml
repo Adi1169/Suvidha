@@ -38,7 +38,7 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/Review"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_below="@+id/imageView2"

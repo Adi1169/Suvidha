@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,6 +35,8 @@ public class regsevice extends AppCompatActivity {
     EditText phone,description;
     String userId;
     String name,email;
+    Button Register;
+    int rating=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +47,26 @@ public class regsevice extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         description = findViewById(R.id.description);
         radioGroup = findViewById(R.id.radiogroup);
+        Register = findViewById(R.id.Register);
+        userId = Auth.getCurrentUser().getUid();
+        Toast.makeText(regsevice.this,userId,Toast.LENGTH_SHORT).show();
+        DocumentReference dRefer =fstore.collection("users").document(userId);
+        dRefer.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable  DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
 
+                name= value.getString("name");
+                email= value.getString("email");
+                Toast.makeText(regsevice.this,name+"i am in "+email,Toast.LENGTH_SHORT).show();
+            }
+        });
+        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(email)){
+            Register.setClickable(true);
+        }
     }
 
     public void onregister(View view) {
-        userId = Auth.getCurrentUser().getUid();
+
         String pho = phone.getText().toString().trim();
         String info = description.getText().toString().trim();
         if(TextUtils.isEmpty(pho)){
@@ -60,23 +78,20 @@ public class regsevice extends AppCompatActivity {
             return;
         }
         DocumentReference documentReference =fstore.collection(selectedTask).document(userId);
-        DocumentReference dRefer =fstore.collection("users").document(userId);
         Map<String,Object> user = new HashMap<>();
 
 
 
 
-        dRefer.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-              @Override
-            public void onEvent(@Nullable  DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                name= value.getString("name");
-                email= value.getString("email");
-            }
-            });
+
+       Toast.makeText(regsevice.this," the "+name+" and "+email+" i am out"+userId,Toast.LENGTH_SHORT).show();
         user.put("name",name);
         user.put("email",email);
         user.put("phone",pho);
         user.put("description",info);
+        user.put("rating",rating);
+        user.put("service",selectedTask);
+        user.put("id",userId);
 
         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -97,4 +112,5 @@ public class regsevice extends AppCompatActivity {
 
 
     }
+
 }
