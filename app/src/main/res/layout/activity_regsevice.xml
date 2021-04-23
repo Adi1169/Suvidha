@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
+    android:background="@color/white"
 
     tools:context=".regsevice">
 
@@ -15,7 +15,7 @@
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="125dp"
-        android:background="@drawable/gradient"
+        android:background="@drawable/border"
         android:drawableLeft="@drawable/email"
         android:ems="10"
         android:hint="phone"
@@ -31,7 +31,7 @@
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="185dp"
-        android:background="@drawable/gradient"
+        android:background="@drawable/border"
         android:drawableLeft="@drawable/actionlock"
         android:ems="10"
         android:hint="Experience/Description"
@@ -46,13 +46,15 @@
         android:layout_alignTop="@+id/pword"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="250dp"
-        android:textColor="@color/black">
+        android:textColor="@color/black"
+        >
 
         <RadioButton
             android:id="@+id/cook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="type"
+            android:buttonTint="@color/orange"
             android:text="Cook"
             android:textColor="@color/black"
             android:textColorLink="@color/colorblizardblue" />
@@ -62,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="type"
+            android:buttonTint="@color/orange"
             android:text="Caretaker"
             android:textColor="@color/black" />
 
@@ -70,6 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="type"
+            android:buttonTint="@color/orange"
             android:text="Cleaner"
             android:textColor="@color/black" />
 
@@ -78,6 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="type"
+            android:buttonTint="@color/orange"
             android:text="Plumber"
             android:textColor="@color/black" />
 
@@ -86,6 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="type"
+            android:buttonTint="@color/orange"
             android:text="Maid"
             android:textColor="@color/black" />
 
@@ -101,10 +107,10 @@
         android:layout_marginTop="420dp"
 
         android:layout_marginEnd="143dp"
-        android:background="@drawable/buttondesign"
+        android:background="@drawable/servedy"
         android:clickable="false"
         android:onClick="onregister"
         android:text="Register"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
 </RelativeLayout>
