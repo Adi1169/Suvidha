@@ -62,4 +62,8 @@ public class services extends AppCompatActivity {
         super.onStop();
         serviceAdapter.stopListening();
     }
+
+    public void back(View view) {
+        startActivity(new Intent(getApplicationContext(),cate.class));
+    }
 }

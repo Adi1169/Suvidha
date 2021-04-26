@@ -5,20 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    android:background="@color/colorgrey"
+    android:background="@drawable/border"
     android:onClick="morey">
 
 
     <TextView
         android:id="@+id/firename"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-
+        android:textSize="35dp"
+        android:fontFamily="serif-monospace"
         android:layout_marginRight="15dp"
         android:text="TextView"
+        android:textColor="@color/orange"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="20dp" />
 
@@ -27,10 +29,11 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_centerHorizontal="true"
-
+        android:textColor="@color/orange"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="4dp"
         android:layout_marginRight="15dp"
+        android:drawableLeft="@drawable/email"
         android:text="TextView"
         app:layout_constraintTop_toBottomOf="@+id/firename"
         tools:layout_editor_absoluteX="47dp" />
@@ -43,6 +46,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="4dp"
         android:layout_marginRight="15dp"
+        android:textColor="@color/orange"
         android:text="TextView"
         app:layout_constraintTop_toBottomOf="@+id/fireemail"
         tools:layout_editor_absoluteX="0dp" />
@@ -50,22 +54,26 @@
     <TextView
         android:id="@+id/fireinfo"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="4dp"
         android:layout_marginRight="15dp"
+        android:textColor="@color/orange"
         android:text="TextView"
         app:layout_constraintTop_toBottomOf="@+id/firephone"
         tools:layout_editor_absoluteX="1dp" />
 
     <Button
         android:id="@+id/More"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:text="Button"
+        android:layout_marginTop="40dp"
+        android:text="Call"
+        android:background="@drawable/servedy"
+        android:drawableLeft="@drawable/phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"

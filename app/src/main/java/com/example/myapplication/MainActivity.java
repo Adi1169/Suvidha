@@ -49,7 +49,7 @@ MainActivity extends AppCompatActivity {
         auth  = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
         if(auth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(),AppView.class));
+            startActivity(new Intent(getApplicationContext(),cate.class));
             finish();
         }
 

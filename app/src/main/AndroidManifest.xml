@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
-
+<uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -11,10 +12,6 @@
         <activity android:name=".DescribeserviceActivity" />
         <activity android:name=".services" />
         <activity android:name=".regsevice" />
-        <activity
-            android:name=".cook"
-            android:label="@string/title_activity_cook"
-            android:theme="@style/NoActionBar" />
         <activity android:name=".AppView" />
         <activity android:name=".login" />
         <activity android:name=".MainActivity">

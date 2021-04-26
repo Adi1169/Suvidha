@@ -1,16 +1,29 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,7 +33,18 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,17 +56,28 @@ public class regsevice extends AppCompatActivity {
     String selectedTask="";
     FirebaseAuth Auth;
     FirebaseFirestore fstore;
+    FirebaseStorage fire;
     EditText phone,description;
     String userId;
     String name,email;
     Button Register;
+    ImageView profile;
+    TextView browse;
+    Uri filepath;
+    Bitmap bitmap;
+    int temp=0;
+
+
     int rating=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regsevice);
-        Auth = FirebaseAuth.getInstance();
+        profile=(ImageView) findViewById(R.id.profile);
+        browse = (TextView) findViewById(R.id.browse);
 
+        Auth = FirebaseAuth.getInstance();
+        fire = FirebaseStorage.getInstance();
         fstore = FirebaseFirestore.getInstance();
         phone = findViewById(R.id.phone);
         description = findViewById(R.id.description);
@@ -77,7 +112,12 @@ public class regsevice extends AppCompatActivity {
             description.setError("description required");
             return;
         }
+        if(temp!=1){
+            browse.setError("Profile Picture is required");
+        }
         DocumentReference documentReference =fstore.collection(selectedTask).document(userId);
+        uploadtofirebase();
+
         Map<String,Object> user = new HashMap<>();
 
 
@@ -101,7 +141,28 @@ public class regsevice extends AppCompatActivity {
         });
 
         Toast.makeText(regsevice.this,"added successfully",Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(getApplicationContext(),AppView.class));
+        startActivity(new Intent(getApplicationContext(),cate.class));
+    }
+
+    private void uploadtofirebase() {
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setTitle("File Uploader");
+        dialog.show();
+        StorageReference uploader = fire.getReference().child(userId+selectedTask);
+        uploader.putFile(filepath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                dialog.dismiss();
+                Toast.makeText(regsevice.this,"file uploaded",Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                float percent = (100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                dialog.setMessage("Uploaded"+(int)percent+"%");
+            }
+        });
     }
 
     public void type(View view) {
@@ -113,4 +174,47 @@ public class regsevice extends AppCompatActivity {
 
     }
 
+    public void tocate(View view) {
+        startActivity(new Intent(getApplicationContext(),cate.class));
+    }
+
+    public void permission(View view) {
+        Dexter.withActivity(regsevice.this).withPermission(Manifest.permission.READ_EXTERNAL_STORAGE).withListener(new PermissionListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
+            @Override
+            public void onPermissionGranted(PermissionGrantedResponse response) {
+               Intent intent = new Intent(Intent.ACTION_PICK);
+               intent.setType("image/*");
+               startActivityForResult(Intent.createChooser(intent,"Please select Image"),1);
+            }
+
+            @Override
+            public void onPermissionDenied(PermissionDeniedResponse response) {
+
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                token.continuePermissionRequest();
+            }
+        }).check();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
+        if(requestCode==1 && resultCode==RESULT_OK){
+            filepath=data.getData();
+            try{
+                Toast.makeText(regsevice.this,"got it",Toast.LENGTH_SHORT).show();
+
+                InputStream inputStream =getContentResolver().openInputStream(filepath);
+                bitmap = BitmapFactory.decodeStream(inputStream);
+                profile.setImageBitmap(bitmap);
+                temp=1;
+            }catch (Exception ex){
+
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
