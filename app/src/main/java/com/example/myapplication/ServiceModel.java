@@ -7,6 +7,27 @@ public class ServiceModel {
     String phone;
     String service;
     int rating;
+
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    String imageUrl;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    String username;
     String id;
      ServiceModel() {
 
@@ -29,7 +50,7 @@ public class ServiceModel {
         this.rating = rating;
     }
 
-    public ServiceModel(String description, String email, String name, String phone , String service, String id, int rating) {
+    public ServiceModel(String description, String email, String name, String phone , String service, String id, int rating,String username,String imageUrl) {
         this.description = description;
         this.email = email;
         this.name = name;
@@ -37,6 +58,8 @@ public class ServiceModel {
         this.service = service;
         this.id = id;
         this.rating = rating;
+        this.imageUrl=imageUrl;
+        this.username=username;
     }
     public String getService() {
         return service;

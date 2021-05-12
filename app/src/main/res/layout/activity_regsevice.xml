@@ -7,13 +7,13 @@
     android:background="@color/white"
 
     tools:context=".regsevice">
+
     <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/back"
-        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
         android:onClick="tocate"
-        ></ImageView>
+        android:padding="10dp"
+        android:src="@drawable/back"></ImageView>
 
     <EditText
         android:id="@+id/name"
@@ -21,22 +21,22 @@
         android:layout_height="50dp"
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/border"
-        android:drawableLeft="@drawable/phone"
+        android:drawableLeft="@drawable/ic_action_name"
         android:ems="10"
-        android:hint="text"
-        android:inputType="phone"
+        android:hint="Name"
+        android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/colorgrey" />
 
     <EditText
         android:id="@+id/phone"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="110dp"
         android:background="@drawable/border"
         android:drawableLeft="@drawable/phone"
         android:ems="10"

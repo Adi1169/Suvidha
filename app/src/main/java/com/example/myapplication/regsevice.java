@@ -26,6 +26,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -57,7 +59,7 @@ public class regsevice extends AppCompatActivity {
     FirebaseAuth Auth;
     FirebaseFirestore fstore;
     FirebaseStorage fire;
-    EditText phone,description;
+    EditText phone,description,nam;
     String userId;
     String name,email;
     Button Register;
@@ -65,7 +67,10 @@ public class regsevice extends AppCompatActivity {
     TextView browse;
     Uri filepath;
     Bitmap bitmap;
-    int temp=0;
+    int temp=0,imagegot=0;
+    String image="idk";
+    DocumentReference documentReference;
+    Map<String,Object> user = new HashMap<>();
 
 
     int rating=0;
@@ -75,7 +80,7 @@ public class regsevice extends AppCompatActivity {
         setContentView(R.layout.activity_regsevice);
         profile=(ImageView) findViewById(R.id.profile);
         browse = (TextView) findViewById(R.id.browse);
-
+        nam = findViewById(R.id.name);
         Auth = FirebaseAuth.getInstance();
         fire = FirebaseStorage.getInstance();
         fstore = FirebaseFirestore.getInstance();
@@ -83,6 +88,7 @@ public class regsevice extends AppCompatActivity {
         description = findViewById(R.id.description);
         radioGroup = findViewById(R.id.radiogroup);
         Register = findViewById(R.id.Register);
+        //Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/auth-42912.appspot.com/o/2dNNMMaThRVDkgODp9yDVor1IyB2Driver?alt=media&token=d29aa93c-24d7-49e6-bef4-846122c90099").into(profile);
         userId = Auth.getCurrentUser().getUid();
         Toast.makeText(regsevice.this,userId,Toast.LENGTH_SHORT).show();
         DocumentReference dRefer =fstore.collection("users").document(userId);
@@ -104,6 +110,11 @@ public class regsevice extends AppCompatActivity {
 
         String pho = phone.getText().toString().trim();
         String info = description.getText().toString().trim();
+        String Nam = nam.getText().toString().trim();
+        if(TextUtils.isEmpty(Nam)){
+            nam.setError("Name no is required");
+            return;
+        }
         if(TextUtils.isEmpty(pho)){
             phone.setError("phone no is required");
             return;
@@ -114,18 +125,22 @@ public class regsevice extends AppCompatActivity {
         }
         if(temp!=1){
             browse.setError("Profile Picture is required");
+            Toast.makeText(regsevice.this,"profile pic is must",Toast.LENGTH_SHORT).show();
+            return;
         }
-        DocumentReference documentReference =fstore.collection(selectedTask).document(userId);
-        uploadtofirebase();
 
-        Map<String,Object> user = new HashMap<>();
+         documentReference =fstore.collection(selectedTask).document(userId);
+
+
+
 
 
 
 
 
        Toast.makeText(regsevice.this," the "+name+" and "+email+" i am out"+userId,Toast.LENGTH_SHORT).show();
-        user.put("name",name);
+        user.put("username",name);
+        user.put("name",Nam);
         user.put("email",email);
         user.put("phone",pho);
         user.put("description",info);
@@ -133,14 +148,11 @@ public class regsevice extends AppCompatActivity {
         user.put("service",selectedTask);
         user.put("id",userId);
 
-        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d("TAG","onSuccess: user profile is created for "+ userId);
-            }
-        });
 
-        Toast.makeText(regsevice.this,"added successfully",Toast.LENGTH_SHORT).show();
+        uploadtofirebase();
+
+
+
         startActivity(new Intent(getApplicationContext(),cate.class));
     }
 
@@ -148,13 +160,34 @@ public class regsevice extends AppCompatActivity {
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setTitle("File Uploader");
         dialog.show();
-        StorageReference uploader = fire.getReference().child(userId+selectedTask);
+        final StorageReference uploader = fire.getReference().child(userId+selectedTask);
         uploader.putFile(filepath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 dialog.dismiss();
                 Toast.makeText(regsevice.this,"file uploaded",Toast.LENGTH_SHORT).show();
+                uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        image= String.valueOf(uri);
+                        Toast.makeText(regsevice.this,"Image"+image,Toast.LENGTH_SHORT).show();
+                        while(image=="idk"){}
+                        user.put("imageUrl",image);
+                        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d("TAG","onSuccess: user profile is created for "+ userId);
+                                Toast.makeText(regsevice.this,"added successfully",Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(regsevice.this,"Error Occured"+e,Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
